@@ -10,7 +10,7 @@ public class Main {
     public static boolean argCheck(String[] args)
     {
         int length=args.length;
-        if(length!=2 && length!=3)
+        if(!(length==2 || length==3))
             return false;
         File f=new File(args[0]);
         if(!f.exists())
