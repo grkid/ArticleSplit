@@ -30,14 +30,14 @@ public class ArticleOutput {
         for(String line:lineText)
         {
             String temp=line;
-            int bias=lineLength-temp.length();
+            int bias=lineLength-1-temp.length();
             if(type.equals("L"))
             {
-                temp=getSpaces(bias)+temp;
+                temp=temp+getSpaces(bias);
             }
             else if(type.equals("R"))
             {
-                temp+=getSpaces(bias);
+                temp=getSpaces(bias)+temp;
             }
             else    //C
             {
@@ -55,6 +55,7 @@ public class ArticleOutput {
 
                 temp=getSpaces(bias1)+temp+getSpaces(bias2);
             }
+            System.out.println(temp.length());
 
             if(bubble.equals("YES"))
             {

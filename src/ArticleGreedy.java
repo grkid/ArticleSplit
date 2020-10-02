@@ -20,18 +20,36 @@ public class ArticleGreedy {
             //< line length
 
             //corner case
+
+            //only when a single line cannot handle one word should i split it
             if(line.length()+1+splitText[i].length()>=maxLineLength)
             {
-                lineText.add(splitText[i].substring(0,maxLineLength-2-line.length()));
-                //caution. -2 instead of -1
-                splitText[i]=splitText[i].substring(maxLineLength-1-line.length());
-                i--;
+                if(splitText[i].length()<maxLineLength)
+                {
+                    lineText.add(line);
+                    line=splitText[i];
+                }
+                else {
+                    int bias = maxLineLength - 2 - line.length();//space remain
+                    boolean biasFlag=false;
+                    if (bias == 0) {
+                        lineText.add(line);
+                       line="";
+                       bias=maxLineLength-1;
+                       biasFlag=true;
+                    }
+                    line += biasFlag?"":" " + (splitText[i].substring(0, bias));
+                    splitText[i] = splitText[i].substring(bias);
+                    lineText.add(line);
+                    line = "";
+                    i--;
+                }
             }
-            else if(line.length()+splitText[i].length()+1 > maxLineLength)
-            {
-                lineText.add(line);
-                line="";
-            }
+//            else if(line.length()+splitText[i].length()+1 > maxLineLength)
+//            {
+//                lineText.add(line);
+//                line=splitText[i];
+//            }
             else
             {
                 line+=(line.length()==0?"":" ")+splitText[i];

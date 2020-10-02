@@ -31,12 +31,20 @@ public class ArticleSplit {
         {
             end=i;
             if(!isAlphabet(a.charAt(i))) {
-                res.add(a.substring(begin, end + 1));
-                begin=i+1;
+                if(a.charAt(i)!='\'')
+                {
+                    res.add(a.substring(begin, end));
+
+                    if(begin==0&&end==0) {
+                        res.set(res.size()-1,a.substring(0,1));
+                        //corner case
+                    }
+                    begin = i;
+                }
             }
-            if(i==a.length()-1)
-                res.add(a.substring(begin,end+1));
         }
+        res.add(a.substring(begin,a.length()));
+
         return (String[])res.toArray(new String[res.size()]);
     }
 
@@ -51,8 +59,11 @@ public class ArticleSplit {
         for (String text : texts) {
             String[] temp = singleSplit(text);
             for (String subStr : temp) {
-                if (subStr.length() == 1 && !isAlphabet(subStr.charAt(0)))
+                if (subStr.length() == 1 && !isAlphabet(subStr.charAt(0))) {
+                    if (stashText.isEmpty())
+                        stashText.add("");
                     stashText.set(stashText.size() - 1, stashText.lastElement() + subStr);
+                }
                 else
                     stashText.add(subStr);
             }

@@ -62,6 +62,6 @@ public class Main {
             //something else here so TODO
         }
         else
-            System.out.println();
+            System.out.println(finalResult);
     }
 }

@@ -14,7 +14,7 @@ public class ArticleReader {
         FileInputStream fis=new FileInputStream(fileName);
         byte[] b;
         b=fis.readAllBytes();
-        result= Arrays.toString(b);
+        result= new String(b);
     }
 
     public String getResult() {
