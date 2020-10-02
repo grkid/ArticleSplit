@@ -1,3 +1,4 @@
+import java.io.File;
 import java.io.IOException;
 
 public class Main {
@@ -8,9 +9,19 @@ public class Main {
 
     public static boolean argCheck(String[] args)
     {
-
+        int length=args.length;
+        if(length!=2 && length!=3)
+            return false;
+        File f=new File(args[0]);
+        if(!f.exists())
+            return false;
+        if(Integer.parseInt(args[1])<=0)
+            return false;
+        if(length==3)
+        {
+            return args[2].equals("L") || args[2].equals("R") || args[2].equals("C") || args[2].equals("B");
+        }
         return true;
-
     }
 
     public static void printBubbleLine(int length)
@@ -24,8 +35,10 @@ public class Main {
             throws IOException
     {
         //filename length [mode]
-        if(!argCheck(args))
+        if(!argCheck(args)) {
+            System.out.println("Error message here. but i forget it.");
             return;
+        }
         ArticleReader r=new ArticleReader(args[0]);
         if(args.length==3)
         {
@@ -46,6 +59,7 @@ public class Main {
             printBubbleLine(Integer.parseInt(args[1]));
             System.out.println(finalResult);
             printBubbleLine(Integer.parseInt(args[1]));
+            //something else here so TODO
         }
         else
             System.out.println();
